@@ -12,12 +12,9 @@ HUD is done via urllib3. This alleviates the need for an account at any specific
 
 My specific purpose was to utilize this script to aid in assessing rental 
 properties by zip code and projected net income required to live in those 
-locations. Net income required to obtain housing at a specific price is based 
-upon the concept of spending no more than 30 percent of one's net income on 
-housing. Gross income is estimated from net income via a flat tax rate. The flat 
-overall income tax rate provided in the script is 25 percent. There are links 
-provided within the code to assess state and federal income tax rates if you 
-wish to modify these.
+locations. Gross income required to obtain housing at a specific price is based 
+upon the concept of spending no more than 30 percent of one's gross income on 
+housing. Gross income and net income are estimated via the 30 percent concept and a flat tax rate. The flat overall income tax rate provided in the script is 25 percent. There are links provided within the code to assess state and federal income tax rates if you wish to modify these.
 
 Data returned from this script will provide basic information pertaining to the
 50th percentile of property rental prices (HUD Data), as well as demographic 

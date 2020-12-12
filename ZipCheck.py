@@ -294,13 +294,13 @@ NetIncomeReq = []
 GrossReq = []
 HourlyRate = []
 for aValue in Rents:
-	# **RENT AS 30 PERCENT OF INCOME**
-	NetIncomeReq.append((aValue/0.3)*12)
 	# **ASSUME A FLAT 25 PERCENT INCOME TAX**
 	# Assume 25 perc state and fed tax combined
-	GrossReq.append(((aValue/0.3)*12)/0.75)
+	NetIncomeReq.append(((aValue/0.3)*12)*0.75)
+	# **RENT AS 30 PERCENT OF INCOME**
+	GrossReq.append(((aValue/0.3)*12))
 	# Estimated hourly rate required (Based from Gross Req)
-	HR = (((aValue/0.3)*12/0.75)/52)/40
+	HR = (((aValue/0.3)*12)/52)/40
 	HourlyRate.append(HR)
 
 # Combine in a dataframe to illustrate the data in the prompt
