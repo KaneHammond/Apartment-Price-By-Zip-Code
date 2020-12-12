@@ -3,17 +3,13 @@ import subprocess
 import sys
 import os
 import os.path
-import os, shutil
-import glob
-from glob import glob
 from os import listdir
 from os.path import exists
 import urllib3
 import pandas as pd
-import numpy as np
 import datetime
 from datetime import datetime
-import csv
+# import csv
 
 # The HUD data comes in as a xlsx file.
 try:
