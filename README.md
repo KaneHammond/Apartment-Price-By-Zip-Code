@@ -32,4 +32,3 @@ command prompt (if that is where you choose to initialize it). Simply run the
 script and provide a five digit zip code for an assessment when asked to do so. 
 If the analysis is running for the first time, data from HUD is relatively small 
 in file size, taking little time to download. However, the search option chosen for the uszipcode search uses the full dataset they provide. Expect a download of around 450 mb for this. Afterwards, the uszipcode data will be used to reference the HUD data with the given zip code. This reference will be initially based upon county name, state, then city name if applicable. To update the HUD data, simply delete the CSV folder that is written when initiating the file. The script will automatically pull the most recent documentation from HUD for the current year.
-
