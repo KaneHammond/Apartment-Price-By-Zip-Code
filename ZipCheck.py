@@ -300,7 +300,7 @@ for aValue in Rents:
 	# Assume 25 perc state and fed tax combined
 	GrossReq.append(((aValue/0.3)*12)/0.75)
 	# Estimated hourly rate required (Based from Gross Req)
-	HR = (((aValue/0.3)/0.75)/4)/40
+	HR = (((aValue/0.3)*12/0.75)/52)/40
 	HourlyRate.append(HR)
 
 # Combine in a dataframe to illustrate the data in the prompt
