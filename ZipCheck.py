@@ -69,7 +69,9 @@ CSVOut = 'CSV_DATA/'
 
 if PullInData == 'Yes':
 	# Define the base file name
-	BF = 'https://www.huduser.gov/portal/datasets/50thper/FY%s_50_County' % str(YearOfInterest)
+	# BF = 'https://www.huduser.gov/portal/datasets/50thper/FY%s_50_County' % str(YearOfInterest)
+	BF = 'https://www.huduser.gov/portal/datasets/fmr/fmr%s/FY%s_FMRs_cbo.xlsx' % (str(YearOfInterest), str(YearOfInterest)[-2::])
+	# print BF
 	# We are using a document link on the HUC website. Since there were
 	# several API options that required an account and/or the user to pay for data,
 	# I felt this was a pretty cool alternative. However, this will only contain
@@ -82,26 +84,28 @@ if PullInData == 'Yes':
 	# As long as the link stays the same, this will work between years.
 
 	# Will try both formats. As there are two potential file names.
-	try:
-		print 'Base Data Download...'
-		# Attempt first file name
-		urllib3.disable_warnings()
-		url = BF+'_rev.xlsx'
-		fileName = "50th_Perc_%s.xlsx" % str(YearOfInterest)
-		with urllib3.PoolManager() as http:
-			r = http.request('GET', url)
-			with open(CSVOut+fileName, 'wb') as fout:
-				fout.write(r.data)
-	except:
-		print 'Base Data Download Fail...\nAlternative File Name Download...'
-		# Attempt other file name
-		urllib3.disable_warnings()
-		url = BF+'.xlsx'
-		fileName = "50th_Perc_%s.xlsx" % str(YearOfInterest)
-		with urllib3.PoolManager() as http:
-			r = http.request('GET', url)
-			with open(CSVOut+fileName, 'wb') as fout:
-				fout.write(r.data)
+	# try:
+	# Download file location changed as of 1/4/2021
+	print 'Base Data Download...'
+	# Attempt first file name
+	urllib3.disable_warnings()
+	# url = BF+'_rev.xlsx'
+	url = BF
+	fileName = "50th_Perc_%s.xlsx" % str(YearOfInterest)
+	with urllib3.PoolManager() as http:
+		r = http.request('GET', url)
+		with open(CSVOut+fileName, 'wb') as fout:
+			fout.write(r.data)
+	# except:
+	# 	print 'Base Data Download Fail...\nAlternative File Name Download...'
+	# 	# Attempt other file name
+	# 	urllib3.disable_warnings()
+	# 	url = BF+'.xlsx'
+	# 	fileName = "50th_Perc_%s.xlsx" % str(YearOfInterest)
+	# 	with urllib3.PoolManager() as http:
+	# 		r = http.request('GET', url)
+	# 		with open(CSVOut+fileName, 'wb') as fout:
+	# 			fout.write(r.data)
 
 ################### Prep current year data for CSV
 
@@ -116,10 +120,14 @@ def csv_from_excel(excelFile, BaseOutputLoc):
 			# Format: ['fips2010' 'rent50_0' 'rent50_1' 'rent50_2' 'rent50_3' 'rent50_4' 'state'
 						 # 'cbsasub20' 'areaname20' 'county' 'cousub' 'cntyname' 'name' 'pop2017'
 						 # 'hu2017' 'state_alpha']
+			# Change as of 1/4/2020
+			# Format: fips2010	fmr_0	fmr_1	fmr_2	fmr_3	fmr_4	state	metro_code	areaname	county
+					 # cousub	countyname	county_town_name	pop2017	acs_2020_2	state_alpha	fmr_type	metro	fmr_pct_chg	fmr_dollar_chg
+
 			# We only want rent and loc name data
 			# New format: [Rent 0 BR-4, City State, County Name, Secondary Name, State]
 			DataToKeep = [int(ListItem[1]), int(ListItem[2]), int(ListItem[3]), int(ListItem[4]),
-				int(ListItem[5]), str(ListItem[8]), str(ListItem[11]), str(ListItem[12]), str(ListItem[-1])]
+				int(ListItem[5]), str(ListItem[8]), str(ListItem[11]), str(ListItem[12]), str(ListItem[-5])]
 			ModData.append(DataToKeep)
 		except:
 			# We will pass those with special characters that are not
